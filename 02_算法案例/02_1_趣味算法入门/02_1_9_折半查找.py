@@ -14,7 +14,7 @@ def find(a,target):
     mid=int(a[m])
     h=(n-1)
     high=a[h]
-    while low<high:
+    while low<mid:
         if(target<mid):
             h=m
             high=a[h]
