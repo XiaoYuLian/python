@@ -23,5 +23,11 @@
 #     b[i]=2*i
 # print (a,b)
 
-n=3^3
-print (n)
+for j in range (4,21):
+    n=j
+    for i in range (2,int(n**0.5)+1):
+        if n%i==0:
+            print ("%d不是质数" %n)
+            break
+    else:
+        print("%d是质数" %n)
