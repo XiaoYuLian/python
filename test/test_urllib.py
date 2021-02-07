@@ -22,8 +22,25 @@ http://httpbin.org/  测试用网站
 """
 获得一个get请求
 """
-try:
-    response1=urllib.request.urlopen("http://httpbin.org/get",timeout=0.2)    #timeout-->相应等待时间，若超时则会报错。用try...catch
-    print(response1.read().decode("utf-8"))
-except urllib.error.URLError as e :
-    print("Time Out")
+# try:
+#     response1=urllib.request.urlopen("http://httpbin.org/get",timeout=0.2)    #timeout-->相应等待时间，若超时则会报错。用try...catch
+#     print(response1.read().decode("utf-8"))
+# except urllib.error.URLError as e :
+#     print("Time Out")
+
+# response =urllib.request.urlopen("https://movie.douban.com/top250?start=&filter=")      #错误418 ”我是一个茶壶”即被发现是一个爬虫
+# print(response.status)
+
+# response =urllib.request.urlopen("http://www.baidu.com")
+# print(response.status)
+# print(response.getheaders())        #打印头文件
+# print(response.getheader("server")) #想要其中一个信息注意去掉s，在括号里用引号引住键
+
+"""
+伪装成浏览器
+"""
+url = "https://music.163.com"
+headers={"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36 Edg/88.0.705.56"}
+req = urllib.request.Request(url=url,headers=headers)     #封装一个请求
+respones = urllib.request.urlopen(req)
+print(respones.read().decode("utf-8"))
