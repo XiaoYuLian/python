@@ -1,6 +1,13 @@
 git add .
 git commit -m 'first commit'
 
+切换回主分支：
+git checkout master
+
+
+git push origin master
+git config
+
 if __name__=="__main__" :
 
 """
