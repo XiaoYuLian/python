@@ -91,7 +91,7 @@ t_list = bs.select(".mnav")                       #select 后面直接指定特�
 # t_list = bs.select("a[class='bri']")              #select 后面直接指定某个标签（这里是a）的属性（例中用的class） 注意引号，这里要用两次引号，用单双引号区别开
 # t_list = bs.select("title")
 # t_list = bs.select("head>title")                  #按结构查找 "head>title"---->表示head里面的title
-#t_list = bs.select(".mnav~.bri")                   #按结构查找 ".mnav ~ bri"---->表示与.mnavt平级的.bri
+# t_list = bs.select(".mnav~.bri")                  #按结构查找 ".mnav ~ bri"---->表示与.mnavt平级的.bri
 
 # print(t_list)
 
