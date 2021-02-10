@@ -28,7 +28,7 @@ def GetData(baseurl):
         #2、逐一解析数据
         soup = BeautifulSoup(html,"html.parser")        #把获取到的信息(hrml)使用"html.parser"解析器打开，定义为一个新的变量 soup
         for item in soup.find_all('div',class_="item"):#找到所有div，并且包含class为item的属性。class后加下划线，与系统关键字区分。
-            print(item)
+            print("ok")
     return datalist
 
 #得到指定的一个网页的内容
@@ -41,7 +41,7 @@ def askURL(url):
     try:
         response=urllib.request.urlopen(reqeust)
         html=response.read().decode("utf-8")
-        # print(html)
+        print(html)
     except urllib.error.URLError as e :
         if hasattr(e,"code"):
             print(e.code)
