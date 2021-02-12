@@ -8,14 +8,18 @@ import sqlite3
 
 
 def main():
-    baseurl = "https://movie.douban.com/top250?start=&filter="
+    baseurl = "https://movie.douban.com/top250?start="
     #1、爬取网页
     datalist = GetData(baseurl)
     #3、保存数据
-    savepath=".\\豆瓣电影Top250.xls"                    #.\\表示文件目录；./表示当前文件夹
+    savepath=".\\豆瓣电影Top250.xls"                      #.\\表示文件目录；./表示当前文件夹
     # SaveData(savepath)
     # askURL("https://movie.douban.com/top250?start=&filter=")
     
+#制定用于获取对应消息的正则表达式
+findlink = re.compile(r'<a href="(.*?)">')              #获取影片详情页链接
+findTitle = re.compile(r'span class="title">(.*?)</span>',re.S)
+findCrid = re.compile(r'<span class="rating_num" property="v:average">(.*?)</span>')
 
 
 #爬取网页
@@ -27,8 +31,13 @@ def GetData(baseurl):
         html = askURL(url)
         #2、逐一解析数据
         soup = BeautifulSoup(html,"html.parser")        #把获取到的信息(hrml)使用"html.parser"解析器打开，定义为一个新的变量 soup
-        for item in soup.find_all('div',class_="item"):#找到所有div，并且包含class为item的属性。class后加下划线，与系统关键字区分。
-            print("ok")
+        for item in soup.find_all('div',class_="item"): #找到所有div，并且包含class为item的属性。class后加下划线，与系统关键字区分。
+            # print(item)
+            data=[]                                     #保存一部电影的信息
+            item=str(item)
+
+            link=re.findall(findlink,item)[0]
+            print(link)
     return datalist
 
 #得到指定的一个网页的内容
@@ -41,7 +50,7 @@ def askURL(url):
     try:
         response=urllib.request.urlopen(reqeust)
         html=response.read().decode("utf-8")
-        print(html)
+        # print(html)
     except urllib.error.URLError as e :
         if hasattr(e,"code"):
             print(e.code)
