@@ -18,8 +18,12 @@ def main():
     
 #制定用于获取对应消息的正则表达式
 findlink = re.compile(r'<a href="(.*?)">')              #获取影片详情页链接
-findTitle = re.compile(r'span class="title">(.*?)</span>',re.S)
-findCrid = re.compile(r'<span class="rating_num" property="v:average">(.*?)</span>')
+findImgsrc = re.compile(r'img=.*src="(.*?)"')   #图片
+findTitle = re.compile(r'span class="title">(.*?)</span>',re.S) #标题
+findRating = re.compile(r'<span class="rating_num" property="v:average">(.*?)</span>') #评分
+findJudge = re.compile(r'<span>(\d*)人评价</span>') #评价人数
+findInq = re.compile(r'<span class="inq">(.*)</span>')  #评语
+findBd = re.compile(r'<p class="">(.*)</p>,re.S')   #影片详情
 
 
 #爬取网页
@@ -36,7 +40,36 @@ def GetData(baseurl):
             data=[]                                     #保存一部电影的信息
             item=str(item)
 
-            link=re.findall(findlink,item)[0]
+            link = re.findall(findlink,item)[0]
+            data.append(link)
+            Imgsrc = re.findall(findImgsrc,item)[0]
+            data.append(Imgsrc)
+            Titles = re.findall(findTitle,item)
+            if (len(Titles)==2):
+                CTitle=Titles[0]
+                data.append(CTitle)
+                OTitle=Titles[1].replace("/","")        #replace 将名字中的斜杠换成空
+                data.append(OTitle)
+            else:
+                data.append(Titles[0])
+                data.append("")                         #留空，保证excel中数据结构整齐
+            Rating = re.findall(findRating,item)[0]
+            data.append(Rating)
+            Judge = re.findall(findJudge,item)[0]
+            data.append(Judge)
+            Inq = re.findall(findInq,item)
+            if (len(Inq)!=0):
+                Inq=Inq[0].replace("。","")
+                data.append(Inq)
+            else:
+                data.append("")
+                
+            data.append(Inq)
+            Bd = re.findall(findBd,item)[0]
+            Bd = re.sub('<br(\s+)?>(\s+)?',"",Bd)       #去掉其中的<br/>
+            Bd = re.sub('/',' ',Bd)                     #替换/-->空格
+            data.append(Bd.strip)
+
             print(link)
     return datalist
 
