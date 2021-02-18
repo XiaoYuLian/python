@@ -4,6 +4,7 @@ import re                               #正则表达式，进行文字匹配
 import urllib.request,urllib.error      #制定url，获取网页数据
 import pandas.io.excel._xlwt            #进行excel操作
 import sqlite3
+import xlwt
 
 
 
@@ -13,17 +14,17 @@ def main():
     datalist = GetData(baseurl)
     #3、保存数据
     savepath=".\\豆瓣电影Top250.xls"                      #.\\表示文件目录；./表示当前文件夹
-    # SaveData(savepath)
+    SaveData(datalist,savepath)
     # askURL("https://movie.douban.com/top250?start=&filter=")
     
 #制定用于获取对应消息的正则表达式
 findlink = re.compile(r'<a href="(.*?)">')              #获取影片详情页链接
-findImgsrc = re.compile(r'img=.*src="(.*?)"')   #图片
-findTitle = re.compile(r'span class="title">(.*?)</span>',re.S) #标题
-findRating = re.compile(r'<span class="rating_num" property="v:average">(.*?)</span>') #评分
-findJudge = re.compile(r'<span>(\d*)人评价</span>') #评价人数
+findImgsrc = re.compile(r'<img.*?src="(.*?)"',re.S)     #图片
+findTitle = re.compile(r'<span class="title">(.*)</span>') #标题
+findRating = re.compile(r'<span class="rating_num" property="v:average">(.*)</span>') #评分
+findJudge = re.compile(r'<span>(\d*)人评价</span>')     #评价人数
 findInq = re.compile(r'<span class="inq">(.*)</span>')  #评语
-findBd = re.compile(r'<p class="">(.*)</p>,re.S')   #影片详情
+# findBd = re.compile(r'<p class>(.*?)</p>,re.S')      #影片详情
 
 
 #爬取网页
@@ -52,7 +53,7 @@ def GetData(baseurl):
                 data.append(OTitle)
             else:
                 data.append(Titles[0])
-                data.append("")                         #留空，保证excel中数据结构整齐
+                data.append(' ')                        #留空，保证excel中数据结构整齐
             Rating = re.findall(findRating,item)[0]
             data.append(Rating)
             Judge = re.findall(findJudge,item)[0]
@@ -62,15 +63,15 @@ def GetData(baseurl):
                 Inq=Inq[0].replace("。","")
                 data.append(Inq)
             else:
-                data.append("")
+                data.append(" ")
                 
-            data.append(Inq)
-            Bd = re.findall(findBd,item)[0]
-            Bd = re.sub('<br(\s+)?>(\s+)?',"",Bd)       #去掉其中的<br/>
-            Bd = re.sub('/',' ',Bd)                     #替换/-->空格
-            data.append(Bd.strip)
+            # Bd = re.findall(findBd,item)[0]
+            # Bd = re.sub('<br(\s+)?>(\s+)?'," ",str(Bd)) #去掉其中的<br/>
+            # Bd = re.sub('/'," ",Bd)                     #替换/-->空格
+            # data.append(Bd.strip)                       #去掉前后空格
+            datalist.append(data)                       #吧处理好的信息放入datalist 
 
-            print(link)
+    # print(datalist)
     return datalist
 
 #得到指定的一个网页的内容
@@ -93,9 +94,19 @@ def askURL(url):
 
 
 #保存数据
-# def SaveData(savepath):
-#     print (save)
-
+def SaveData(datalist,savepath):
+    print ("saving")
+    workbook = xlwt.Workbook(encoding="utf-8")                                      #创建workbook对象
+    worksheet = workbook.add_sheet('豆瓣top',cell_overwrite_ok=True)                #创建工作表
+    clo = ("电影详情","图片","中文名","外文名","评分","评价数","概况")
+    for i in range(0,7):                                                            #表头
+        worksheet.write(0,i,clo[i])
+    for i in range (0,250):
+        print("正在处理第%d条信息" %(i+1))
+        data=datalist[i]
+        for j in range (0,7):
+            worksheet.write(i+1,j,data[j])  
+    workbook.save('student.xls')                                        #第一行是表头，佛而已微试是i+1，j
 
 
 if __name__ == "__main__":
