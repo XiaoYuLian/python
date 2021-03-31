@@ -6,24 +6,24 @@
 丙是数学家，他说:4位的车号刚好是一个整数的平方。
 请根据以上线索求出车号。
 """
-i=1
-n=i*i
-while  n<10000:
-    d=(n)%10
-    c=(n/10)%10
-    b=(n/100)%10
-    a=n/1000%10
-    if(n>=1000):
-        if (a==b):
-            if(c==d):
-                print('a''b''c''d')
-    i=i+1
-print ("jieshu")
+# i=1
+# n=i*i
+# while  n<10000:
+#     d=(n)%10
+#     c=(n/10)%10
+#     b=(n/100)%10
+#     a=n/1000%10
+#     if(n>=1000):
+#         if (a==b):
+#             if(c==d):
+#                 print('a''b''c''d')
+#     i=i+1
+# print ("jieshu")
 
-"""
+
 ##i 代表车牌前两位，j代表车牌后两位，完整的车牌号为k
 for i in range (10):
-    for i in range (10):
+    for j in range (10):
         #判断前两位和后两位是否相同
         if i!=j:
             #组成4位车牌号码
@@ -33,7 +33,7 @@ for i in range (10):
              if temp * temp ==k:
                  print("车牌号为：",k)
 
-"""
+
 
 """
 循环测试

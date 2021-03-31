@@ -15,7 +15,7 @@ def main():
     #3、保存数据
     savepath=".\\豆瓣电影Top250.xls"                      #.\\表示文件目录；./表示当前文件夹
     SaveData(datalist,savepath)
-    # askURL("https://movie.douban.com/top250?start=&filter=")
+    # askURL("https://movie.douban.com/top250?start=&filter=")      #会在下方的终端中显示一遍获取到的内容用于检测
     
 #制定用于获取对应消息的正则表达式
 findlink = re.compile(r'<a href="(.*?)">')              #获取影片详情页链接
@@ -32,7 +32,7 @@ def GetData(baseurl):
     datalist=[]
     for i in range (0,10):
         url=baseurl + str(i*25)                         #基础url+每页的起始序号
-        askURL(url)
+        # askURL(url)
         html = askURL(url)
         #2、逐一解析数据
         soup = BeautifulSoup(html,"html.parser")        #把获取到的信息(hrml)使用"html.parser"解析器打开，定义为一个新的变量 soup
@@ -106,8 +106,9 @@ def SaveData(datalist,savepath):
         data=datalist[i]
         for j in range (0,7):
             worksheet.write(i+1,j,data[j])  
-    workbook.save('student.xls')                                        #第一行是表头，佛而已微试是i+1，j
+    workbook.save('豆瓣电影Top250.xls')                                        #第一行是表头，佛而已微试是i+1，j
 
 
 if __name__ == "__main__":
     main()
+    print("爬取完毕")

@@ -1,3 +1,4 @@
+笔记：
 git add .
 git commit -m 'first commit'
 
@@ -16,3 +17,11 @@ python中"//"表示相处取整，"/"除法可产生小数，"%"相除取余，�
 
 pip -->
 pip3 -->
+
+修改pip镜像为国内源
+
+mkdir ~/.pip   
+vim ~/.pip/pip.conf
+[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple                    #原url
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple

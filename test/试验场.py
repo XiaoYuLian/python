@@ -23,11 +23,17 @@
 #     b[i]=2*i
 # print (a,b)
 
-for j in range (4,21):
-    n=j
-    for i in range (2,int(n**0.5)+1):
-        if n%i==0:
-            print ("%d不是质数" %n)
-            break
-    else:
-        print("%d是质数" %n)
+# for j in range (4,21):
+#     n=j
+#     for i in range (2,int(n**0.5)+1):
+#         if n%i==0:
+#             print ("%d不是质数" %n)
+#             break
+#     else:
+#         print("%d是质数" %n)
+
+i=0 
+for j in range (1,21):
+    k=int(input("第%d选项是"%j))
+    i=i+k
+print (i)
