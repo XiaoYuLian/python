@@ -32,8 +32,31 @@
 #     else:
 #         print("%d是质数" %n)
 
-i=0 
-for j in range (1,21):
-    k=int(input("第%d选项是"%j))
-    i=i+k
-print (i)
+# i=0 
+# for j in range (1,21):
+#     k=int(input("第%d选项是"%j))
+#     i=i+k
+# print (i)
+# g=open("bb.txt","a")
+# g.write("今天心情很不好"'\t'"我只想说三句话"'\n'"包括上一句在内"'\n'"我说完了")
+# g.close
+
+#
+# workbook = xlwt.Workbook(encoding="utf-8")                                      #创建workbook对象
+# worksheet = workbook.add_sheet('豆瓣top',cell_overwrite_ok=True)                #创建工作表
+# clo = ("出发地","到达地","出行量")
+
+# # #
+# for i in range(1,10):
+#     for j in range(1,i+1):
+#         print("%d X %d =%d" %(i,j,i*j))
+#     print("\n")
+n = int(input("请输入n="))
+sum = 0
+for i in range (1,n+1):
+    mid = 1
+    for j in range (1,i+1):
+        mid = mid*j
+    print(mid)
+    sum = sum+mid
+print("结果是%d"%sum)
