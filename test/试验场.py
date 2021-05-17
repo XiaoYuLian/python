@@ -51,12 +51,25 @@
 #     for j in range(1,i+1):
 #         print("%d X %d =%d" %(i,j,i*j))
 #     print("\n")
-n = int(input("请输入n="))
+
+
+# n = int(input("请输入n="))
+# sum = 0
+# for i in range (1,n+1):
+#     mid = 1
+#     for j in range (1,i+1):
+#         mid = mid*j
+#     print(mid)
+#     sum = sum+mid
+# print("结果是%d"%sum)
+
+print("程序开始")
+n = int(input("请输入变量n"))
 sum = 0
 for i in range (1,n+1):
-    mid = 1
+    m = 1
     for j in range (1,i+1):
-        mid = mid*j
-    print(mid)
-    sum = sum+mid
-print("结果是%d"%sum)
+        m = m*j
+    sum = sum+m
+print(sum)
+    
