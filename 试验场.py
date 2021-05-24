@@ -63,13 +63,23 @@
 #     sum = sum+mid
 # print("结果是%d"%sum)
 
-print("程序开始")
-n = int(input("请输入变量n"))
-sum = 0
-for i in range (1,n+1):
-    m = 1
-    for j in range (1,i+1):
-        m = m*j
-    sum = sum+m
-print(sum)
-    
+# print("程序开始")
+# n = int(input("请输入变量n"))
+# sum = 0
+# for i in range (1,n+1):
+#     m = 1
+#     for j in range (1,i+1
+#         m = m*j
+#     sum = sum+m
+# print(sum)
+
+sum=0
+i=0
+while sum<1000000:
+    a=79800+1000*i
+    sum=sum+4*a
+    i+=1
+print(i,sum,a)
+
+c=79800*13+80800*9+81800*5+82800+1
+print(c)
