@@ -11,7 +11,7 @@
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}\\manage.py",
-            "console": "externalTerminal",
+            "console": "integratedTerminal",
             "args": [
                 "runserver",
                 "--noreload"
