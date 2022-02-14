@@ -73,13 +73,6 @@
 #     sum = sum+m
 # print(sum)
 
-sum=0
-i=0
-while sum<1000000:
-    a=79800+1000*i
-    sum=sum+4*a
-    i+=1
-print(i,sum,a)
-
-c=79800*13+80800*9+81800*5+82800+1
-print(c)
+import pygame 
+pygame.init() 
+pygame.display.list_modes() 
